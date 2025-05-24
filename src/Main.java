@@ -17,7 +17,7 @@ public class Main {
 
 //            insertStudent();
 //            updateStudent();
-//            deleteStudent();
+            deleteStudent();
             retrieveStudent();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -57,7 +57,23 @@ public class Main {
             System.out.println(e.getMessage());
         }
     }
+    static void deleteStudent() {
+        try {
+            Statement stmt = connection.createStatement();
+            String query = "DELETE from students WHERE id = 3";
+            int rowsAffected = stmt.executeUpdate(query);
 
+            if (rowsAffected > 0) {
+                System.out.println("Student deleted successfully");
+            }
+            else {
+                System.out.println("Student delete failed");
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
     static void retrieveStudent() {
         try {
             Statement statement = connection.createStatement();
