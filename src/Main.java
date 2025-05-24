@@ -15,7 +15,9 @@ public class Main {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
 
-            insertStudent();
+//            insertStudent();
+//            updateStudent();
+//            deleteStudent();
             retrieveStudent();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -38,6 +40,24 @@ public class Main {
             System.out.println(e.getMessage());
         }
     }
+    static void updateStudent() {
+        try {
+            Statement stmt = connection.createStatement();
+            String query = String.format("UPDATE STUDENTS set marks = %f WHERE id = %o", 90.9, 1);
+            int rowsAffected = stmt.executeUpdate(query);
+
+            if (rowsAffected > 0) {
+                System.out.println("Student updated successfully");
+            }
+            else {
+                System.out.println("Student update failed");
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     static void retrieveStudent() {
         try {
             Statement statement = connection.createStatement();
