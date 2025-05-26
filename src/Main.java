@@ -1,7 +1,6 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import com.mysql.cj.xdevapi.PreparableStatement;
+
+import java.sql.*;
 
 public class Main {
 
@@ -16,8 +15,8 @@ public class Main {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
 
 //            insertStudent();
-//            updateStudent();
-            deleteStudent();
+            updateStudent();
+//            deleteStudent();
             retrieveStudent();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -42,9 +41,11 @@ public class Main {
     }
     static void updateStudent() {
         try {
-            Statement stmt = connection.createStatement();
-            String query = String.format("UPDATE STUDENTS set marks = %f WHERE id = %o", 90.9, 1);
-            int rowsAffected = stmt.executeUpdate(query);
+            String query = "UPDATE STUDENTS set marks = ? WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, 50);
+            stmt.setInt(2, 1);
+            int rowsAffected = stmt.executeUpdate();
 
             if (rowsAffected > 0) {
                 System.out.println("Student updated successfully");
