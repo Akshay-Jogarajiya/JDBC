@@ -14,9 +14,9 @@ public class Main {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
 
-//            insertStudent();
+            insertStudent();
             updateStudent();
-//            deleteStudent();
+            deleteStudent();
             retrieveStudent();
         } catch (Exception e) {
             throw new RuntimeException(e);
